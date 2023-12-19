@@ -9,23 +9,20 @@ def read_root():
 
 @app.get("/sayHello/{name}")
 async def dynamic_content(name: str):
-
-    if not template_path.exists():
-        return PlainTextResponse("Error: File not found", status_code=500)
     return {"Hello": "World"}
 
 
 @app.get("/sayHello2/{name}")
 async def dynamic_content(name: str):
-
-    if not template_path.exists():
-        return PlainTextResponse("Error: File not found", status_code=500)
-
     try:
         template_path = Path(__file__).parent / "sayHello.html"
     except Exception as e:
         print(f"Error: {e}")
         return PlainTextResponse(f"Error1: {e}", status_code=500)
+
+    if not template_path.exists():
+        return PlainTextResponse("Error: File not found", status_code=500)
+    
     try:
         html_content = template_path.read_text()
     except Exception as e:
