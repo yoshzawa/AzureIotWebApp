@@ -12,6 +12,13 @@ async def dynamic_content(name: str):
     template_path = Path(__file__).parent / "sayHello.html"
     if not template_path.exists():
         return PlainTextResponse("Error: File not found", status_code=500)
+
+    try:
+        html_content = template_path.read_text()
+    except Exception as e:
+        print(f"Error: {e}")
+        return PlainTextResponse(f"Error2: {e}", status_code=500)
+
     return {"path": template_path}
 
 
