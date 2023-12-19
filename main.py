@@ -19,7 +19,7 @@ async def dynamic_content(name: str):
 
 
 @app.get("/sayHello2/{name}")
-async def dynamic_content(name: str):
+async def dynamic_content2(name: str):
     try:
         template_path = Path(__file__).parent / "sayHello.html"
     except Exception as e:
