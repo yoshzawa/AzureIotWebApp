@@ -13,7 +13,8 @@ async def dynamic_content(name: str):
     if not template_path.exists():
         return PlainTextResponse("Error: File not found", status_code=500)
     html_content = template_path.read_text()
-
+    dynamic_html = html_content.replace("{{ name }}", name)  
+    html_content = template_path.read_text()
     return {"path": template_path}
 
 @app.get("/sayHello3/{name}")
@@ -23,9 +24,7 @@ async def dynamic_content3(name: str):
         return PlainTextResponse("Error: File not found", status_code=500)
     html_content = template_path.read_text()
     dynamic_html = html_content.replace("{{ name }}", name)  
-
-    return {"path": template_path}
-
+    return FileResponse(content=dynamic_html, media_type="text/html")
 
 @app.get("/sayHello2/{name}")
 async def dynamic_content2(name: str):
