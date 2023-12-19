@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI , HTMLResponse
 from pathlib import Path
 
 app = FastAPI()
@@ -24,7 +24,7 @@ async def dynamic_content3(name: str):
         return PlainTextResponse("Error: File not found", status_code=500)
     html_content = template_path.read_text()
     dynamic_html = html_content.replace("{{ name }}", name)  
-    return FileResponse(content=dynamic_html, media_type="text/html")
+    return HTMLResponse(content=dynamic_html)
 
 @app.get("/sayHello2/{name}")
 async def dynamic_content2(name: str):
