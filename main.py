@@ -9,7 +9,7 @@ def read_root():
 
 @app.get("/sayHello/{name}")
 async def dynamic_content(name: str):
-        try:
+    try:
         template_path = Path(__file__).parent / "sayHello.html"
     except Exception as e:
         print(f"Error: {e}")
