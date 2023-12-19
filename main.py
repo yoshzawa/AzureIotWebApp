@@ -7,6 +7,14 @@ app = FastAPI()
 def read_root():
     return {"Hello": "World"}
 
+@app.get("/sayHello/{name}")
+async def dynamic_content(name: str):
+
+    if not template_path.exists():
+        return PlainTextResponse("Error: File not found", status_code=500)
+    return {"Hello": "World"}
+
+
 @app.get("/sayHello2/{name}")
 async def dynamic_content(name: str):
 
